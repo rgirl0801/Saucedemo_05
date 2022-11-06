@@ -1,4 +1,4 @@
-name: GitHub Actions saucedemo
+name: selenium_test
 on: [push, pull_request]
 
 permissions:
@@ -7,16 +7,16 @@ permissions:
   contents: read
 
 jobs:
-  Explore-GitHub-Actions:
+  selenium_test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out this repo
         uses: actions/checkout@v3
-      - name: Setup python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Black and Flake8
+      - name: Check code for errors by flake8 and format code with black
         uses: ricardochaves/python-lint@v1.4.0
         with:
           python-root-list: ""
@@ -35,25 +35,30 @@ jobs:
       - name: Update repo
         run: sudo apt-get update
       - name: Install software
-        run: sudo apt-get install -y firefox
-      - name: Firefox version
+        run: sudo apt-get install -y chromium-browser firefox
+      - name: Check Chromium version
+        run: chromium-browser --version
+      - name: Check Firefox version
         run: firefox --version
       - name: Install poetry
         run: curl -sSL https://install.python-poetry.org | python3 -
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: deployer/.venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/pr-deployer.yml') }}
       - name: Install dependencies
         run: poetry install
       - name: Run pytest
         run: poetry run pytest
-
       - name: Run the pytest and generate junit xml report
         run: poetry run pytest --junitxml report.xml
-
       - name: Create test summary
         uses: test-summary/action@v2.0
         with:
           paths: report.xml
         if: always()
-
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
