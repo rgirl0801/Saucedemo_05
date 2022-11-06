@@ -45,10 +45,18 @@ jobs:
       - name: Run pytest
         run: poetry run pytest
 
-        working-directory: tests
+        - name: Run the pytest and generate junit xml report
+        run: poetry run pytest --junitxml report.xml
+
       - name: Create test summary
-        uses: test-summary/action@v1
+        uses: test-summary/action@v2.0
         with:
-          paths: tests/results/**/*.xml
+          paths: report.xml
         if: always()
-        
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: "report.xml"
+          
