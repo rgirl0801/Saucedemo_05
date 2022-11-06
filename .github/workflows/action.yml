@@ -46,7 +46,7 @@ jobs:
         run: poetry run pytest
 
       - name: Create test summary
-        uses: test-summary/action@dist
+        uses: test-summary/action@v2
         with:
           paths: test/results/**/*.xml
         if: always()
