@@ -45,7 +45,7 @@ jobs:
       - name: Run pytest
         run: poetry run pytest
 
-        - name: Run the pytest and generate junit xml report
+      - name: Run the pytest and generate junit xml report
         run: poetry run pytest --junitxml report.xml
 
       - name: Create test summary
@@ -59,4 +59,3 @@ jobs:
         if: always()
         with:
           junit_files: "report.xml"
-          
