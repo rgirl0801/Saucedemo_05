@@ -45,16 +45,9 @@ jobs:
       - name: Run pytest
         run: poetry run pytest
 
-      - name: Test Summary
-        uses: test-summary/action@v2
+      - name: Create test summary
+        uses: test-summary/action@dist
         with:
-          paths: "test/results/**/TEST-*.xml"
-        if: always()
-
-      - name: Upload test summary
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-summary
-          path: test-summary.md
+          paths: results/**/*.xml
         if: always()
         
