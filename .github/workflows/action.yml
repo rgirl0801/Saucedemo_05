@@ -91,3 +91,11 @@ jobs:
         if: always()
         with:
           junit_files: "report.xml"
+      #----------------------------------------------
+      #              save report for download
+      #----------------------------------------------
+      - name: Upload report using artifacts
+        uses: actions/upload-artifact@v3
+        with: 
+          name: report
+          path: /home/runner/work/Saucedemo_05/Saucedemo_05/
