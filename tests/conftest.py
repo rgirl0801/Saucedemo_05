@@ -9,7 +9,7 @@ from webdriver_manager.core.utils import ChromeType
 driver = None
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def b(browser):
     global driver
     if driver is not None:
@@ -37,7 +37,7 @@ def pytest_addoption(parser):
     )
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def browser(request):
     return request.config.getoption("--browser")
 
