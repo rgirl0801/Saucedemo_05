@@ -21,7 +21,7 @@ def b(browser):
         )
     else:
         o = webdriver.FirefoxOptions()
-        o.headless = False
+        o.headless = True
         driver = webdriver.Firefox(
             service=FirefoxService(GeckoDriverManager().install()), options=o
         )
