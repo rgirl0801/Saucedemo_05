@@ -5,6 +5,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.chrome.service import Service as ChromiumService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.utils import ChromeType
+import conf
 
 
 @pytest.fixture()
@@ -12,7 +13,7 @@ def b(browser):
     driver = None
     if browser == 'chrome':
         o = webdriver.ChromeOptions()
-        o.headless = True
+        o.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Chrome(
             service=ChromiumService(
                 ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
@@ -21,7 +22,7 @@ def b(browser):
         )
     else:
         o = webdriver.FirefoxOptions()
-        o.headless = True
+        o.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Firefox(
             service=FirefoxService(GeckoDriverManager().install()), options=o
         )
@@ -44,7 +45,7 @@ def browser(request):
 @pytest.fixture(autouse=True)
 def g(b):
     print('\n*** start fixture = setup ***\n')
-    b.get('https://www.saucedemo.com/')
+    b.get(conf.URL)
     yield b
     b.quit()
     print('\n*** end fixture = teardown ***\n')
