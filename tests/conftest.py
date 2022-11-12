@@ -8,9 +8,8 @@ from webdriver_manager.core.utils import ChromeType
 import conf
 
 
-@pytest.fixture()
-def b(browser):
-    driver = None
+@pytest.fixture(scope='class')
+def d(browser):
     if browser == 'chrome':
         o = webdriver.ChromeOptions()
         o.headless = conf.BROWSER_HEADLESS
@@ -37,17 +36,17 @@ def pytest_addoption(parser):
     )
 
 
-@pytest.fixture()
+@pytest.fixture(scope='class')
 def browser(request):
     return request.config.getoption("--browser")
 
 
-@pytest.fixture(autouse=True)
-def g(b):
+@pytest.fixture(scope='class', autouse=True)
+def g(d):
     print('\n*** start fixture = setup ***\n')
-    b.get(conf.URL)
-    yield b
-    b.quit()
+    d.get(conf.URL)
+    yield d
+    d.quit()
     print('\n*** end fixture = teardown ***\n')
 
 
