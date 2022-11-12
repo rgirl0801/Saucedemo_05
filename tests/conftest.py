@@ -18,7 +18,10 @@ def b(browser):
         o = webdriver.ChromeOptions()
         o.headless = True
         driver = webdriver.Chrome(
-            service=ChromeService(ChromeDriverManager().install()), options=o
+            service=ChromiumService(
+                ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+            ),
+            options=o,
         )
     else:
         o = webdriver.FirefoxOptions()
