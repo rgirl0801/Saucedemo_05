@@ -18,5 +18,9 @@ class LoginPage:
         self.driver.find_element(ll.login_btn['by'], ll.login_btn['v']).click()
 
     def action_logout(self):
-        self.driver.find_element(ll.hamburger_btn['by'], ll.hamburger_btn['v']).click()
-        self.driver.find_element(ll.logout_btn['by'], ll.logout_btn['v']).click()
+        self.driver.find_element(
+            ll.hamburger_btn['by'],
+            ll.hamburger_btn['v']).click()
+        self.driver.find_element(
+            ll.logout_btn['by'],
+            ll.logout_btn['v']).click()
