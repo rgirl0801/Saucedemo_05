@@ -9,14 +9,10 @@ class LoginPage:
         return self.driver.title
 
     def action_login(self, username, password):
-        self.driver.find_element(
-            ll.input_username['by'], ll.input_username['v']
-        ).send_keys(username)
-        self.driver.find_element(
-            ll.input_password['by'], ll.input_password['v']
-        ).send_keys(password)
-        self.driver.find_element(ll.login_btn['by'], ll.login_btn['v']).click()
+        self.driver.find_element(*ll.input_username).send_keys(username)
+        self.driver.find_element(*ll.input_password).send_keys(password)
+        self.driver.find_element(*ll.login_btn).click()
 
     def action_logout(self):
-        self.driver.find_element(ll.hamburger_btn['by'], ll.hamburger_btn['v']).click()
-        self.driver.find_element(ll.logout_btn['by'], ll.logout_btn['v']).click()
+        self.driver.find_element(*ll.hamburger_btn).click()
+        self.driver.find_element(*ll.logout_btn).click()
