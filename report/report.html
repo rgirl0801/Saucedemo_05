@@ -439,7 +439,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>Kate Fox</h1>
-    <p>Report generated on 12-Nov-2022 at 22:18:11 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
+    <p>Report generated on 12-Nov-2022 at 22:28:30 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -455,8 +455,8 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.10.7</td></tr></table>
     <h2>Summary</h2>
-    <p>2 tests ran in 4.59 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">2 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>2 tests ran in 4.50 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">0 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">2 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -467,28 +467,28 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <th class="sortable links" col="links">Links</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
-      <tbody class="passed results-table-row">
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
+          <td class="col-result">Failed</td>
           <td class="col-name">tests/test_sample.py::TestSample::test_sample[standard_user-secret_sauce]</td>
-          <td class="col-duration">3.53</td>
+          <td class="col-duration">2.78</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -----------------------------Captured stdout setup------------------------------ <br/>
+            <div class="log">self = &lt;tests.test_sample.TestSample object at 0x7f993af226b0&gt;, username = &#x27;standard_user&#x27;, password = &#x27;secret_sauce&#x27;<br/><br/>    @pytest.mark.parametrize(<br/>        &#x27;username, password&#x27;,<br/>        [(&#x27;standard_user&#x27;, &#x27;secret_sauce&#x27;), (&#x27;problem_user&#x27;, &#x27;secret_sauce&#x27;)],<br/>    )<br/>    def test_sample(self, username, password):<br/>&gt;       lp = LoginPage(self.d)<br/><span class="error">E       AttributeError: &#x27;TestSample&#x27; object has no attribute &#x27;d&#x27;</span><br/><br/>tests/test_sample.py:13: AttributeError<br/> -----------------------------Captured stdout setup------------------------------ <br/>
 *** start fixture = setup ***
 
-<br/> -----------------------------Captured stderr setup------------------------------ <br/>[WDM] - Downloading:   0%|          | 0.00/2.57k [00:00&lt;?, ?B/s][WDM] - Downloading: 19.0kB [00:00, 16.7MB/s]                   
+<br/> -----------------------------Captured stderr setup------------------------------ <br/>[WDM] - Downloading:   0%|          | 0.00/2.57k [00:00&lt;?, ?B/s][WDM] - Downloading: 19.0kB [00:00, 14.2MB/s]                   
 <br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
+          <td class="col-result">Failed</td>
           <td class="col-name">tests/test_sample.py::TestSample::test_sample[problem_user-secret_sauce]</td>
-          <td class="col-duration">1.03</td>
+          <td class="col-duration">1.66</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ----------------------------Captured stdout teardown---------------------------- <br/>
+            <div class="log">self = &lt;tests.test_sample.TestSample object at 0x7f993af22560&gt;, username = &#x27;problem_user&#x27;, password = &#x27;secret_sauce&#x27;<br/><br/>    @pytest.mark.parametrize(<br/>        &#x27;username, password&#x27;,<br/>        [(&#x27;standard_user&#x27;, &#x27;secret_sauce&#x27;), (&#x27;problem_user&#x27;, &#x27;secret_sauce&#x27;)],<br/>    )<br/>    def test_sample(self, username, password):<br/>&gt;       lp = LoginPage(self.d)<br/><span class="error">E       AttributeError: &#x27;TestSample&#x27; object has no attribute &#x27;d&#x27;</span><br/><br/>tests/test_sample.py:13: AttributeError<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 *** end fixture = teardown ***
 
 <br/></div></td></tr></tbody></table></body></html>
