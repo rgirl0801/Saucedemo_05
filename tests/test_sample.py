@@ -1,5 +1,4 @@
 from pages.login_page import LoginPage
-import time
 import pytest
 from locators.login_locators import LoginLocators as ll
 

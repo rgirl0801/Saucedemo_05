@@ -1,4 +1,4 @@
-from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 import logging
@@ -12,7 +12,7 @@ class Core:
 
     def find_element(self, locator):
         try:
-            self.LOGGER.info(f"local core.find_element method")
+            self.LOGGER.info("local core.find_element method")
             return WebDriverWait(self.driver, timeout=5).until(
                 lambda d: d.find_element(locator[0], locator[1])
             )

@@ -1,6 +1,5 @@
 from locators.login_locators import LoginLocators as ll
 from core.core import Core
-import time
 
 
 class LoginPage(Core):
@@ -21,5 +20,9 @@ class LoginPage(Core):
         Core.click(self, [ll.login_btn['by'], ll.login_btn['v']])
 
     def action_logout(self):
-        self.driver.find_element(ll.hamburger_btn['by'], ll.hamburger_btn['v']).click()
-        self.driver.find_element(ll.logout_btn['by'], ll.logout_btn['v']).click()
+        self.driver.find_element(
+            ll.hamburger_btn['by'],
+            ll.hamburger_btn['v']).click()
+        self.driver.find_element(
+            ll.logout_btn['by'],
+            ll.logout_btn['v']).click()
