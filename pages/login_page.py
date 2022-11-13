@@ -21,8 +21,8 @@ class LoginPage(Core):
 
     def action_logout(self):
         self.driver.find_element(
-            ll.hamburger_btn['by'],
-            ll.hamburger_btn['v']).click()
+            ll.hamburger_btn['by'], ll.hamburger_btn['v']
+        ).click()
         self.driver.find_element(
-            ll.logout_btn['by'],
-            ll.logout_btn['v']).click()
+            ll.logout_btn['by'], ll.logout_btn['v']
+        ).click()
