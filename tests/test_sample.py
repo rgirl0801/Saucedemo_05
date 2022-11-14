@@ -13,3 +13,19 @@ class TestSample:
         assert lp.login_title() == ll.title
         lp.action_login(username, password)
         lp.action_logout()
+
+    '''
+    Example of skipped test
+    '''
+
+    @pytest.mark.skip(reason="test is skipped because, ")
+    def test_login_skip(self):
+        pass
+
+    '''
+    Example of xfail test
+    '''
+
+    @pytest.mark.xfail
+    def test_login_invalid(self):
+        pass

@@ -51,4 +51,4 @@ def g(d):
 
 
 def pytest_html_report_title(report):
-    report.title = "Kate Fox"
+    report.title = "REPORT"
