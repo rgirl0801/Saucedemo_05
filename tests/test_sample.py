@@ -4,6 +4,8 @@ from locators.login_locators import LoginLocators as ll
 
 
 class TestSample:
+    @pytest.mark.smoke
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         'username, password',
         [('standard_user', 'secret_sauce'), ('problem_user', 'secret_sauce')],
@@ -26,6 +28,7 @@ class TestSample:
     Example of xfail test
     '''
 
+    @pytest.mark.regression
     @pytest.mark.xfail
     def test_login_invalid(self):
         pass

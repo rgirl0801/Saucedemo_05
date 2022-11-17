@@ -47,6 +47,12 @@ _Below is an example of how you can instruct your audience on installing and set
 - Run only specific function from the test
 `$poetry run pytest -k '<part_of_test_fn_name>'`
 
+- Run only smoke tests
+`$poetry run pytest -m smoke`
+
+- Run only regression tests
+`$poetry run pytest -m regression`
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Links
