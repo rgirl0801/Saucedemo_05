@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.chrome.service import Service as ChromiumService
+from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.utils import ChromeType
 import conf
@@ -14,11 +14,7 @@ def d(browser):
         o = webdriver.ChromeOptions()
         o.headless = conf.BROWSER_HEADLESS
         driver = webdriver.Chrome(
-            service=ChromiumService(
-                ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-            ),
-            options=o,
-        )
+            service=ChromeService(ChromeDriverManager().install()), options=o)
     else:
         o = webdriver.FirefoxOptions()
         o.headless = conf.BROWSER_HEADLESS
