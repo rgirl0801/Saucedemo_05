@@ -11,12 +11,8 @@ class LoginPage(Core):
         return self.driver.title
 
     def action_login(self, username, password):
-        Core.send_keys(
-            self, ll.input_username, username
-        )
-        Core.send_keys(
-            self, ll.input_password, password
-        )
+        Core.send_keys(self, ll.input_username, username)
+        Core.send_keys(self, ll.input_password, password)
         Core.click(self, ll.login_btn)
 
     def action_logout(self):
