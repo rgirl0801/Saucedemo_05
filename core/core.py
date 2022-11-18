@@ -14,7 +14,7 @@ class Core:
         try:
             self.LOGGER.info("local core.find_element method")
             return WebDriverWait(self.driver, timeout=wait).until(
-                lambda d: d.find_element(locator[0], locator[1])
+                lambda d: d.find_element(*locator)
             )
         except NoSuchElementException as e:
             self.LOGGER.error(f"NoSuchElementException: {e}")
