@@ -14,7 +14,7 @@ class LoginPage(Core):
         Core.send_keys(
             self, ll.input_username, username
         )
-        Core(
+        Core.send_keys(
             self, ll.input_password, password
         )
         Core.click(self, ll.login_btn)
