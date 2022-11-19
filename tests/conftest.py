@@ -12,20 +12,20 @@ directory = 'report/assets/'
 
 
 @pytest.fixture(scope='class')
-def driver(browser):
+def driver(browser, headless):
     global drv
     Path(directory).mkdir(parents=True, exist_ok=True)
     if drv is not None:
         return drv
     if browser == 'chrome':
         o = webdriver.ChromeOptions()
-        o.headless = conf.BROWSER_HEADLESS
+        o.headless = headless
         drv = webdriver.Chrome(
             service=ChromeService(ChromeDriverManager().install()), options=o
         )
     else:
         o = webdriver.FirefoxOptions()
-        o.headless = conf.BROWSER_HEADLESS
+        o.headless = headless
         drv = webdriver.Firefox(
             service=FirefoxService(GeckoDriverManager().install()), options=o
         )
@@ -38,11 +38,21 @@ def pytest_addoption(parser):
         default="firefox",
         help="define browser: chrome or firefox, --browser=chrome",
     )
+    parser.addoption(
+        "--headless",
+        action="store_true",
+        help="headless mode on or off, --headless",
+    )
 
 
 @pytest.fixture(scope='class')
 def browser(request):
     return request.config.getoption("--browser")
+
+
+@pytest.fixture(scope='class')
+def headless(request):
+    return request.config.getoption("--headless")
 
 
 @pytest.fixture(scope='class', autouse=True)
