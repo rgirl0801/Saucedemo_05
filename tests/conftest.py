@@ -7,27 +7,29 @@ from webdriver_manager.chrome import ChromeDriverManager
 import conf
 from pathlib import Path
 
-driver = None
+drv = None
 directory = 'report/assets/'
 
 
 @pytest.fixture(scope='class')
-def d(browser):
-    global driver
+def driver(browser):
+    global drv
     Path(directory).mkdir(parents=True, exist_ok=True)
+    if drv is not None:
+        return drv
     if browser == 'chrome':
         o = webdriver.ChromeOptions()
         o.headless = conf.BROWSER_HEADLESS
-        driver = webdriver.Chrome(
+        drv = webdriver.Chrome(
             service=ChromeService(ChromeDriverManager().install()), options=o
         )
     else:
         o = webdriver.FirefoxOptions()
         o.headless = conf.BROWSER_HEADLESS
-        driver = webdriver.Firefox(
+        drv = webdriver.Firefox(
             service=FirefoxService(GeckoDriverManager().install()), options=o
         )
-    return driver
+    return drv
 
 
 def pytest_addoption(parser):
@@ -44,11 +46,11 @@ def browser(request):
 
 
 @pytest.fixture(scope='class', autouse=True)
-def g(d):
+def setup(driver):
     print('\n*** start fixture = setup ***\n')
-    d.get(conf.URL)
-    yield d
-    d.quit()
+    drv.get(conf.URL)
+    yield drv
+    drv.quit()
     print('\n*** end fixture = teardown ***\n')
 
 
@@ -64,13 +66,13 @@ def pytest_runtest_makereport(item, call):
     extra = getattr(report, "extra", [])
     if report.when == "call":
         # always add url to report
-        extra.append(pytest_html.extras.url(driver.current_url))
+        extra.append(pytest_html.extras.url(drv.current_url))
         xfail = hasattr(report, "wasxfail")
         if (report.skipped and xfail) or (report.failed and not xfail):
             file_name = report.nodeid.split('::')[-1] + ".png"
             file_name_ = "." + directory + file_name
             file_name_html = 'assets/' + file_name
-            driver.get_screenshot_as_file(file_name_)
+            drv.get_screenshot_as_file(file_name_)
             if file_name_:
                 html = f"<div><img src='{file_name_html}' alt='screenshot'"
                 html += "onclick='window.open(this.src)' style='width:400px;'"
