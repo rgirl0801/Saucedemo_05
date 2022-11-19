@@ -10,8 +10,8 @@ class TestSample:
         'username, password',
         [('standard_user', 'secret_sauce'), ('problem_user', 'secret_sauce')],
     )
-    def test_sample(self, d, username, password):
-        lp = LoginPage(d)
+    def test_sample(self, browser, username, password):
+        lp = LoginPage(browser)
         assert lp.login_title() == ll.title
         lp.action_login(username, password)
         lp.action_logout()

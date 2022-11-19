@@ -1,27 +1,42 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+
 import conf
 
 
 @pytest.fixture(scope='class')
-def d(browser):
-    if browser == 'chrome':
-        o = webdriver.ChromeOptions()
-        o.headless = conf.BROWSER_HEADLESS
-        driver = webdriver.Chrome(
-            service=ChromeService(ChromeDriverManager().install()), options=o
+def browser(request):
+    request.config.getoption("--browser")
+    browser = request.config.getoption("--browser")
+    if browser == "firefox":
+        options = webdriver.FirefoxOptions()
+        options.add_argument("--window-size=1600,1080")
+        options.headless = True
+
+        browser = webdriver.Firefox(
+            service=FirefoxService(GeckoDriverManager().install()), options=options
         )
+        print('\n*** start fixture = setup ***\n')
+        browser.get(conf.URL)
+        yield browser
+        browser.quit()
+        print('\n*** end fixture = teardown ***\n')
     else:
-        o = webdriver.FirefoxOptions()
-        o.headless = conf.BROWSER_HEADLESS
-        driver = webdriver.Firefox(
-            service=FirefoxService(GeckoDriverManager().install()), options=o
+        options = webdriver.ChromeOptions()
+        options.add_argument("--window-size=1600,1080")
+        options.headless = True
+        browser = webdriver.Chrome(
+            service=ChromeService(ChromeDriverManager().install()), options=options
         )
-    return driver
+        print('\n*** start fixture = setup ***\n')
+        browser.get(conf.URL)
+        yield browser
+        browser.quit()
+        print('\n*** end fixture = teardown ***\n')
 
 
 def pytest_addoption(parser):
@@ -32,19 +47,5 @@ def pytest_addoption(parser):
     )
 
 
-@pytest.fixture(scope='class')
-def browser(request):
-    return request.config.getoption("--browser")
-
-
-@pytest.fixture(scope='class', autouse=True)
-def g(d):
-    print('\n*** start fixture = setup ***\n')
-    d.get(conf.URL)
-    yield d
-    d.quit()
-    print('\n*** end fixture = teardown ***\n')
-
-
-def pytest_html_report_title(report):
-    report.title = "REPORT"
+# def pytest_html_report_title(report):
+#     report.title = "REPORT"
