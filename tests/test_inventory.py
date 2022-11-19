@@ -1,7 +1,6 @@
 import allure
 import pytest
 
-from constants import SOTRING_AZ, SOTRING_ZA, SOTRING_PRICE_ASC, SOTRING_PRICE_DESC
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 
