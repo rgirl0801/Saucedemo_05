@@ -15,7 +15,7 @@ def browser(request):
     if browser == "firefox":
         options = webdriver.FirefoxOptions()
         options.add_argument("--window-size=1600,1080")
-        options.headless = True
+        # options.headless = True
 
         browser = webdriver.Firefox(
             service=FirefoxService(GeckoDriverManager().install()), options=options
@@ -47,5 +47,5 @@ def pytest_addoption(parser):
     )
 
 
-# def pytest_html_report_title(report):
-#     report.title = "REPORT"
+def pytest_html_report_title(report):
+    report.title = "REPORT"
