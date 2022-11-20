@@ -15,8 +15,6 @@ directory = 'report/assets/'
 def driver(browser, headless):
     global drv
     Path(directory).mkdir(parents=True, exist_ok=True)
-    if drv is not None:
-        return drv
     if browser == 'chrome':
         o = webdriver.ChromeOptions()
         o.headless = headless
@@ -58,10 +56,10 @@ def headless(request):
 @pytest.fixture(scope='class', autouse=True)
 def setup(driver):
     print('\n*** start fixture = setup ***\n')
-    drv.get(conf.URL)
-    yield drv
-    drv.quit()
+    driver.get(conf.URL)
+    yield driver
     print('\n*** end fixture = teardown ***\n')
+    driver.quit()
 
 
 def pytest_html_report_title(report):
