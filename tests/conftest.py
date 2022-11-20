@@ -15,15 +15,12 @@ directory = 'report/assets/'
 def driver(browser, headless):
     global drv
     Path(directory).mkdir(parents=True, exist_ok=True)
-    # if drv is not None:
-    #     return drv
     if browser == 'chrome':
         o = webdriver.ChromeOptions()
         o.headless = headless
-        drv = webdriver.Chrome('/Users/kate/WebDriver/chromedriver')
-        # drv = webdriver.Chrome(
-        #     service=ChromeService(ChromeDriverManager().install()), options=o
-        # )
+        drv = webdriver.Chrome(
+            service=ChromeService(ChromeDriverManager().install()), options=o
+        )
     else:
         o = webdriver.FirefoxOptions()
         o.headless = headless
@@ -36,7 +33,7 @@ def driver(browser, headless):
 def pytest_addoption(parser):
     parser.addoption(
         "--browser",
-        default="chrome",
+        default="firefox",
         help="define browser: chrome or firefox, --browser=chrome",
     )
     parser.addoption(
@@ -61,8 +58,8 @@ def setup(driver):
     print('\n*** start fixture = setup ***\n')
     driver.get(conf.URL)
     yield driver
-    driver.quit()
     print('\n*** end fixture = teardown ***\n')
+    driver.quit()
 
 
 def pytest_html_report_title(report):

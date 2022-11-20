@@ -33,3 +33,11 @@ class TestSample:
     @pytest.mark.xfail
     def test_login_invalid(self):
         pass
+
+    '''
+    Example of failed test
+    '''
+
+    @pytest.mark.xfail
+    def test_always_fail(self):
+        assert 1 == 0
