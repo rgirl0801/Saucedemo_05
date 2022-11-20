@@ -96,6 +96,7 @@ jobs:
       #----------------------------------------------
       - name: Upload report using artifacts
         uses: actions/upload-artifact@v3
+        if: failure()
         with: 
           name: report
           path: /home/runner/work/Saucedemo_05/Saucedemo_05/report/
