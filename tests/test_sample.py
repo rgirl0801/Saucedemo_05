@@ -1,3 +1,4 @@
+from conf import URL
 from pages.login_page import LoginPage
 import pytest
 from locators.locators import LoginLocators as ll
@@ -10,8 +11,8 @@ class TestSample:
         'username, password',
         [('standard_user', 'secret_sauce'), ('problem_user', 'secret_sauce')],
     )
-    def test_sample(self, browser, username, password):
-        lp = LoginPage(browser)
+    def test_sample(self, driver, username, password):
+        lp = LoginPage(driver)
         assert lp.login_title() == ll.title
         lp.action_login(username, password)
         lp.action_logout()
